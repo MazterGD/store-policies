@@ -5,7 +5,7 @@ import { AppShell, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { CartDrawer } from '@/components/cart-drawer/cart-drawer';
 import { PortalHeader } from './portal-header/portal-header';
-import { PortalSidebar } from './portal-sidebar/PortalSidebar';
+import { PortalSidebar } from './portal-sidebar/portal-sidebar';
 
 export const LayoutShell = ({ children }: { children: React.ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
