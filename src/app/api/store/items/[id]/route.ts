@@ -10,11 +10,11 @@ import { validateStoreItem } from '@/lib/api/validators/store';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   return withAuth(request, async () => {
     try {
-      const item = await getStoreItem(params.id);
+      const item = await getStoreItem(context.params.id);
       return NextResponse.json(item);
     } catch (error) {
       return errorResponse(error as Error);
