@@ -4,7 +4,7 @@ import { memo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
-import { IconHome, IconShirt, IconShoppingBag, IconUsers } from '@tabler/icons-react';
+import { IconFileDescription, IconHome, IconShirt, IconShoppingBag, IconUsers } from '@tabler/icons-react';
 import { Box, NavLink, Stack, Tooltip } from '@mantine/core';
 import classes from './portal-sidebar.module.css';
 
@@ -27,7 +27,7 @@ const navigationData: NavigationItem[] = [
     icon: IconHome,
   },
   {
-    link: '/portal/admin/delegates',
+    link: '/portal/delegates',
     label: 'Delegates',
     icon: IconUsers,
     adminOnly: true,
@@ -36,17 +36,21 @@ const navigationData: NavigationItem[] = [
     link: '/portal/store',
     label: 'Store',
     icon: IconShirt,
+    adminOnly: false,
     children: [
       { link: '/portal/store', label: 'View Store' },
-      { link: '/portal/admin/store', label: 'Manage Items' },
-      { link: '/portal/admin/store/packs', label: 'Manage Packs' },
+      { link: '/portal/store/manage', label: 'Manage Store' },
     ],
   },
   {
     link: '/portal/orders',
     label: 'Orders',
     icon: IconShoppingBag,
-    children: [{ link: '/portal/admin/orders', label: 'Manage Orders' }],
+  },
+  {
+    link: '/portal/payment',
+    label: 'Payment',
+    icon: IconFileDescription,
   },
 ];
 
@@ -60,17 +64,20 @@ export const PortalSidebar = memo(() => {
       <Box className={classes.navbarMain}>
         <Stack gap="xs">
           {navigationData.map((item) => {
+            // Skip profile for admins
             if (item.adminOnly === false && isAdmin) {
               return null;
             }
 
+            // Skip admin-only items for non-admins
             if (item.adminOnly && !isAdmin) {
               return null;
             }
 
-            // Check if this nav item should have nested children
+            // Check if this nav item should have nested children (only for Store and admins)
             const hasChildren = isAdmin && item.children && item.children.length > 0;
 
+            // For items with children, create a parent NavLink that can expand
             if (hasChildren) {
               return (
                 <NavLink

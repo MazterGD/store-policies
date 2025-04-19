@@ -1,1 +1,1 @@
-export * from './portal-sidebar';
+export * from './PortalSidebar';
