@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAdmin, withAuth } from '@/lib/auth/utils';
 import {
   AuthorizationError,
   BadRequestError,
   errorResponse,
   NotFoundError,
-} from '@/lib/core/errors';
-import { supabaseServer } from '@/lib/core/supabase';
+} from '@/lib/api/errors';
+import { isAdmin, withAuth } from '@/lib/api/middleware/auth';
+import { supabaseServer } from '@/lib/supabase';
 
 // Define the interface for update document request body
 interface UpdateDocumentRequest {
@@ -139,7 +139,7 @@ export async function PATCH(request: NextRequest) {
             flight_ticket: false,
           };
 
-          // Insert create record
+          // Insert new record
           const { data, error } = await supabaseServer
             .from('user_documents')
             .insert({ ...defaultValues, ...updateData })

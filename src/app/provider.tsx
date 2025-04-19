@@ -6,16 +6,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { CartProvider } from '@/context/cart';
-import { queryConfig } from '@/lib/core/react-query';
+import { MainErrorFallback } from '@/components/errors/main';
+import { queryConfig } from '@/lib/react-query';
 import { theme } from '@/theme';
+import { CartProvider } from '@/context/CartContext';
 
 type AppProviderProps = {
   children: React.ReactNode;
-};
-
-const MainErrorFallback = () => {
-  return <div>Error!</div>;
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {

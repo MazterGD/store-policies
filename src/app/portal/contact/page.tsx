@@ -1,8 +1,9 @@
+// contact/page.tsx
 'use client';
 
-// import { Container, Stack } from '@mantine/core';
-// import { ContactHeader } from '@/app/portal/contact/(components)/contact-header';
-// import { ContactTable } from '@/app/portal/contact/(components)/contact-table';
+import { Container, Stack } from '@mantine/core';
+import { ContactHeader } from './components/ContactHeader';
+import { ContactTable } from './components/ContactTable';
 
 const dxTeam = [
   {
@@ -40,16 +41,15 @@ const coreTeam = [
 
 const ContactPage = () => {
   return (
-    <div>Hello World!</div>
-    // <Container fluid p="md" style={{ minHeight: '100vh' }}>
-    //   <Stack gap="xl">
-    //     <ContactHeader />
-    //
-    //     <ContactTable title="DX Team" members={dxTeam} />
-    //
-    //     <ContactTable title="Core Committee Team" members={coreTeam} />
-    //   </Stack>
-    // </Container>
+    <Container fluid p="md" style={{ minHeight: '100vh' }}>
+      <Stack gap="xl">
+        <ContactHeader />
+
+        <ContactTable title="DX Team" members={dxTeam} />
+
+        <ContactTable title="Core Committee Team" members={coreTeam} />
+      </Stack>
+    </Container>
   );
 };
 

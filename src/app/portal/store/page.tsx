@@ -1,170 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import { IconAlertCircle, IconPackages } from '@tabler/icons-react';
-import {
-  Alert,
-  Box,
-  Center,
-  Container,
-  Divider,
-  Group,
-  Loader,
-  SimpleGrid,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Container, SimpleGrid, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { ProductCard, ProductModal } from '@/app/portal/store/(components)';
-import { PackCard } from '@/app/portal/store/(components)/pack-card';
-import { PackModal } from '@/app/portal/store/(components)/pack-modal';
-import { useCart } from '@/context/cart';
-import { useStoreItems } from '@/lib/store/items/hooks';
-import { useStorePacks } from '@/lib/store/packs/hooks';
-import { StoreItem, StorePack } from '@/lib/store/types';
+import { useCart } from '@/context';
+import { ProductCard, ProductModal } from '@/components/ui';
+import { items } from './data';
+import { Item, CartItem } from '@/types/store';
 
-export default function StorePage() {
-  const [selectedItem, setSelectedItem] = useState<StoreItem | null>(null);
-  const [selectedPack, setSelectedPack] = useState<StorePack | null>(null);
-
-  const [itemModalOpened, { open: openItemModal, close: closeItemModal }] = useDisclosure(false);
-  const [packModalOpened, { open: openPackModal, close: closePackModal }] = useDisclosure(false);
-
+export default function Page(): JSX.Element {
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [opened, { open, close }] = useDisclosure(false);
   const { addToCart } = useCart();
-  const { data: itemsData, isLoading: isLoadingItems, error: itemsError } = useStoreItems();
-  const { data: packsData, isLoading: isLoadingPacks, error: packsError } = useStorePacks();
 
-  const handleViewProduct = (item: StoreItem) => {
+  const handleViewProduct = (item: Item): void => {
     setSelectedItem(item);
-    openItemModal();
+    open();
   };
 
-  const handleViewPack = (pack: StorePack) => {
-    setSelectedPack(pack);
-    openPackModal();
-  };
-
-  const handleAddToCart = (size?: string, color?: { name: string; hex: string }) => {
+  const handleAddToCart = (size?: string, color?: { name: string; hex: string }): void => {
     if (!selectedItem) {
       return;
     }
 
-    addToCart({
+    // Create a new CartItem
+    const newItem: CartItem = {
       id: selectedItem.id,
-      item_code: selectedItem.item_code,
       name: selectedItem.name,
       price: selectedItem.price,
-      image: selectedItem.images?.[0],
-      size,
+      // Use the first image from the images array if available
+      image: selectedItem.images?.length > 0 ? selectedItem.images[0] : undefined,
+      // Include the selected size and color
+      size: size,
       color: color?.name,
       colorHex: color?.hex,
       quantity: 1,
-    });
+    };
 
-    closeItemModal();
+    // Add to cart using context function
+    addToCart(newItem);
+
+    // Close modal
+    close();
   };
-
-  const items = itemsData?.items || [];
-  const packs = packsData?.packs || [];
-
-  const hasItems = items.length > 0;
-  const hasPacks = packs.length > 0;
-
-  if (isLoadingItems || isLoadingPacks) {
-    return (
-      <Container fluid p="md">
-        <Title size="h2" mb="xl" c="gray.8">
-          Store
-        </Title>
-        <Center mt="xl">
-          <Loader size="lg" />
-        </Center>
-      </Container>
-    );
-  }
-
-  if (itemsError || packsError) {
-    return (
-      <Container fluid p="md">
-        <Title size="h2" mb="xl" c="gray.8">
-          Store
-        </Title>
-        <Alert icon={<IconAlertCircle size={16} />} title="Error" color="red">
-          <Text>Failed to load store items. Please try again later.</Text>
-        </Alert>
-      </Container>
-    );
-  }
 
   return (
     <Container fluid p="md">
-      <Title size="h2" mb="xl" c="gray.8">
+      <Title order={2} c="gray.8" mb="xl">
         Store
       </Title>
 
-      {hasItems || hasPacks ? (
-        <>
-          {/* Packs Section */}
-          {hasPacks && (
-            <Box mb="xl">
-              <Group align="center" mb="md">
-                <Group gap="xs" align="center">
-                  <IconPackages size={24} />
-                  <Title size="h3">Packs</Title>
-                </Group>
-                {hasItems && (
-                  <Text size="sm" c="dimmed">
-                    Get more for less with our bundled packs
-                  </Text>
-                )}
-              </Group>
-
-              <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
-                {packs.map((pack) => (
-                  <PackCard key={pack.id} pack={pack} onViewPackAction={handleViewPack} />
-                ))}
-              </SimpleGrid>
-            </Box>
-          )}
-
-          {hasItems && hasPacks && <Divider my="xl" />}
-
-          {/* Items Section */}
-          {hasItems && (
-            <Box>
-              {hasPacks && (
-                <Title size="h3" mb="md">
-                  Individual Products
-                </Title>
-              )}
-
-              <SimpleGrid cols={{ base: 2, sm: 3, md: 4 }} spacing="lg">
-                {items.map((item) => (
-                  <ProductCard key={item.id} item={item} onViewProductAction={handleViewProduct} />
-                ))}
-              </SimpleGrid>
-            </Box>
-          )}
-        </>
-      ) : (
-        <Center mt="xl">
-          <Alert icon={<IconAlertCircle size={16} />} title="No Items" color="blue">
-            <Text>There are no items available in the store right now.</Text>
-          </Alert>
-        </Center>
-      )}
+      <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="lg">
+        {items.map((item) => (
+          <ProductCard key={item.id} item={item} onViewProduct={handleViewProduct} />
+        ))}
+      </SimpleGrid>
 
       <ProductModal
-        opened={itemModalOpened}
-        onCloseAction={closeItemModal}
+        opened={opened}
+        onClose={close}
         selectedItem={selectedItem}
-        onAddToCartAction={handleAddToCart}
-      />
-
-      <PackModal
-        opened={packModalOpened}
-        onCloseAction={closePackModal}
-        selectedPack={selectedPack}
+        onAddToCart={handleAddToCart}
       />
     </Container>
   );

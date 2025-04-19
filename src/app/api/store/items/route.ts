@@ -1,62 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withAuth } from '@/lib/auth/utils';
-import { BadRequestError, errorResponse } from '@/lib/core/errors';
-import { createStoreItem, getActiveStoreItems } from '@/lib/store/items/db';
-import { StoreItemInput } from '@/lib/store/types';
+import { isAdmin, errorResponse } from '@/app/api/utils/auth';
+import { createStoreItem, getStoreItems } from '@/app/api/utils/db';
 
-/**
- * GET /api/store/items
- * - Public: Get active store items
- */
-export async function GET(request: NextRequest): Promise<NextResponse> {
-  return withAuth(
-    request,
-    async () => {
+// GET /api/store/items - Get all items
+// Use ?includeInactive=true query param to include inactive items (admin only)
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const includeInactive = searchParams.get('includeInactive') === 'true';
+
+    // If includeInactive is true, verify admin permissions
+    if (includeInactive) {
       try {
-        // Return active items for public store
-        const items = await getActiveStoreItems();
-        return NextResponse.json({ items, total: items.length });
+        await isAdmin();
       } catch (error) {
-        return errorResponse(error instanceof Error ? error : new Error(String(error)));
+        // If not admin, ignore the includeInactive parameter
+        const items = await getStoreItems(false);
+        return NextResponse.json(items);
       }
-    },
-    { requireAuth: false } // Allow public access for viewing store items
-  );
+    }
+
+    const items = await getStoreItems(includeInactive);
+    return NextResponse.json(items);
+  } catch (error) {
+    return errorResponse(error as Error);
+  }
 }
 
-/**
- * POST /api/store/items
- * - Admin only: Create a new store item
- */
-export async function POST(request: NextRequest): Promise<NextResponse> {
-  return withAuth(
-    request,
-    async (req) => {
-      try {
-        const body = await req.json();
+// POST /api/store/items - Create a new item (admin only)
+export async function POST(request: NextRequest) {
+  try {
+    // Check if user is admin
+    await isAdmin();
 
-        // Validate input
-        if (!body || typeof body !== 'object') {
-          throw new BadRequestError('Invalid request body');
-        }
+    // Parse request body
+    const body = await request.json();
 
-        const itemData: StoreItemInput = {
-          item_code: body.item_code,
-          name: body.name,
-          price: body.price,
-          images: body.images || [],
-          sizes: body.sizes || [],
-          colors: body.colors || [],
-          description: body.description,
-          active: body.active !== undefined ? body.active : true,
-        };
-
-        const newItem = await createStoreItem(itemData);
-        return NextResponse.json(newItem, { status: 201 });
-      } catch (error) {
-        return errorResponse(error instanceof Error ? error : new Error(String(error)));
+    // Validate required fields
+    const requiredFields = ['item_code', 'name', 'price', 'images', 'sizes', 'colors', 'description'];
+    for (const field of requiredFields) {
+      if (!body[field]) {
+        throw new Error(`${field} is required`);
       }
-    },
-    { requireAuth: true, requireAdmin: true }
-  );
+    }
+
+    // Create item
+    const newItem = await createStoreItem(body);
+
+    return NextResponse.json(newItem, { status: 201 });
+  } catch (error) {
+    return errorResponse(
+      error as Error,
+      (error as Error).message === 'Unauthorized' ? 403 : 400
+    );
+  }
 }
