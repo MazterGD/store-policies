@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a2abfc2-6c28-4606-9f9a-55416e3d2e0b" name="Changes" comment="A lil housekeeping">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/store/orders/validators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/store/orders/validators.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev-main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nishith-p&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nishith-p/portello.git&quot;,
+    &quot;accountId&quot;: &quot;ae6f3ba3-81c9-4e5d-9b2a-f500080ef556&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2vH8XUlVwJYDJH6q575jBSyDlnT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev-packorder&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nishith/Desktop/Clean Project/portello&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;/Users/nishith/Desktop/Clean Project/portello/node_modules/stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/nishith/Desktop/Clean Project/portello/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/nishith/Desktop/Clean Project/portello/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/portal/admin/store/packs/edit/[id]" />
+      <recent name="$PROJECT_DIR$/src/app/portal/admin" />
+      <recent name="$PROJECT_DIR$/src/app/portal/admin/store/(components)/store-item-form/sections" />
+      <recent name="$PROJECT_DIR$/src/lib/auth" />
+      <recent name="$PROJECT_DIR$/src/lib/users" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a2abfc2-6c28-4606-9f9a-55416e3d2e0b" name="Changes" comment="" />
+      <created>1743790678452</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743790678452</updated>
+      <workItem from="1743790679486" duration="26388000" />
+      <workItem from="1744462042462" duration="53734000" />
+    </task>
+    <task id="LOCAL-00001" summary="Layout fixes, working orders.">
+      <option name="closed" value="true" />
+      <created>1744460108106</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744460108107</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Better file struct">
+      <option name="closed" value="true" />
+      <created>1744885660337</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744885660337</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Working store management">
+      <option name="closed" value="true" />
+      <created>1744891156092</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744891156092</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Working order management (admin)">
+      <option name="closed" value="true" />
+      <created>1744899872971</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744899872971</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Working orders (user)">
+      <option name="closed" value="true" />
+      <created>1744902519733</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744902519733</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Working pack orders">
+      <option name="closed" value="true" />
+      <created>1744956457043</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744956457043</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Better code struct, cleaning">
+      <option name="closed" value="true" />
+      <created>1744959514229</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744959514229</updated>
+    </task>
+    <task id="LOCAL-00008" summary="A lil housekeeping">
+      <option name="closed" value="true" />
+      <created>1744961559134</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744961559134</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Layout fixes, working orders." />
+    <MESSAGE value="Better file struct" />
+    <MESSAGE value="Working store management" />
+    <MESSAGE value="Working order management (admin)" />
+    <MESSAGE value="Working orders (user)" />
+    <MESSAGE value="Working pack orders" />
+    <MESSAGE value="Better code struct, cleaning" />
+    <MESSAGE value="A lil housekeeping" />
+    <option name="LAST_COMMIT_MESSAGE" value="A lil housekeeping" />
+  </component>
+</project>
